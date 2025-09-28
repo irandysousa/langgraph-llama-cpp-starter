@@ -100,30 +100,35 @@ class MyLlamaCppWithTools(MyLlamaCpp):
         prompt_parts = []
         
         if self._bound_tools:
-            system_msg = f"""You are a helpful assistant with access to tools. When you need to use a tool, respond with a JSON object in this exact format:
-            ```json
-            {{
-            "tool_calls": [
+            system_msg = f"""You are a helpful, smart, and efficient assistant with access to tools.
+
+            Your task is to answer the user's request by breaking it down into a series of logical steps. For each step, you must decide whether to use a tool or to respond directly to the user.
+
+            **TOOL USAGE RULES:**
+
+            1.  **One Tool at a Time**: You MUST call only ONE tool at a time. For multi-step tasks, you will call a tool, receive the result, and then decide the next step in a new turn.
+
+            2.  **JSON ONLY for Tool Calls**: When you decide to call a tool, your response MUST be ONLY a single JSON object enclosed in ```json code blocks. Nothing else. No explanations, no conversation, no introductory text.
+
+                **Correct Format:**
+                ```json
                 {{
-                "name": "tool_name",
-                "arguments": {{"param1": "value1", "param2": "value2"}}
+                "tool_calls": [
+                    {{
+                    "name": "tool_name",
+                    "arguments": {{"arg1": "value1"}}
+                    }}
+                ]
                 }}
-            ]
-            }}
-            ```
-            Available tools:
+                ```
+
+            3.  **Trust Tool Results**: When you receive a `ToolMessage`, trust its content. Use that result to determine the next logical step. Do not re-run a step that has already been completed successfully.
+
+            4.  **Final Answer**: Once all necessary tool calls are complete and you have the final answer, respond to the user in natural language without any JSON.
+
+            **Available tools:**
             {self._get_tool_schema()}
-
-            Important rules:
-            1. Only use tools when necessary
-            2. Use proper JSON formatting
-            3. Include all required parameters
-            4. You can call multiple tools in one response
-            5. After tool results, provide a natural language response
-
-            For simple questions that don't require tools, respond normally without JSON.
             """
-
             prompt_parts.append(f"<|start_header_id|>system<|end_header_id|>\n\n{system_msg}<|eot_id|>")
         
         # Add conversation messages
@@ -142,41 +147,40 @@ class MyLlamaCppWithTools(MyLlamaCpp):
         prompt_parts.append("<|start_header_id|>assistant<|end_header_id|>\n\n")
         return "".join(prompt_parts)
 
+    # In llama_tool_wrapper.py
+
     def parse_tool_calls(self, response_content: str) -> List[Dict[str, Any]]:
         """
         Extract JSON tool calls from the LLM response.
-
-        Args:
-            response_content (str): The text response from the LLM.
-
-        Returns:
-            List[Dict]: List of parsed tool call dictionaries.
+        This version stops after finding the first valid JSON block.
         """
         tool_calls = []
         
-        # Look for JSON blocks in the response
+        # Look for the first JSON block in the response
         json_pattern = r'```json\s*(.*?)\s*```'
-        json_matches = re.findall(json_pattern, response_content, re.DOTALL)
+        match = re.search(json_pattern, response_content, re.DOTALL)
         
-        for json_text in json_matches:
+        if match:
+            json_text = match.group(1)
             try:
                 parsed = json.loads(json_text)
                 if "tool_calls" in parsed:
-                    tool_calls.extend(parsed["tool_calls"])
+                    # IMPORTANT: Only return the tool calls from the first valid block
+                    return parsed["tool_calls"]
             except json.JSONDecodeError:
-                continue
-        
-        # Also try to find JSON without code blocks
-        if not tool_calls:
-            try:
-                # Try to parse the entire response as JSON
-                parsed = json.loads(response_content.strip())
-                if "tool_calls" in parsed:
-                    tool_calls.extend(parsed["tool_calls"])
-            except json.JSONDecodeError:
+                # If the first block is invalid, we can choose to stop or search for more
+                # For this agent, stopping is safer.
                 pass
+
+        # Fallback for JSON without code blocks (less common with strict prompting)
+        try:
+            parsed = json.loads(response_content.strip())
+            if "tool_calls" in parsed:
+                return parsed["tool_calls"]
+        except json.JSONDecodeError:
+            pass
         
-        return tool_calls
+        return tool_calls # Will be empty if no valid block was found
 
     def execute_tool_calls(self, tool_calls: List[Dict], available_tools: List) -> List[ToolMessage]:
         """
