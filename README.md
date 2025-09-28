@@ -29,8 +29,8 @@ Follow these steps to get the agent up and running.
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME
+git clone [https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git]
+cd langgraph-llama-cpp-starter.git
 ```
 
 ### 2. Set Up a Virtual Environment
