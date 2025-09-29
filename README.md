@@ -1,55 +1,104 @@
+Perfect! Here’s a polished, professional version of your README without emojis:
+
+---
+
 # LangGraph Llama.cpp Starter
 
 [![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-A powerful and easy-to-use starter template for building local, private, tool-calling LLM agents with LangGraph and `llama-cpp-python`.
+A starter template for building local, private, tool-calling LLM agents using LangGraph and `llama-cpp-python`. This repository provides all the code needed to run an intelligent agent that can reason, call tools, and hold conversations—fully offline and under your control.
 
-This repository provides all the necessary code to run a sophisticated agent that can reason, use tools (like a calculator), and hold a conversation—all running on your own machine, no API keys required.
+---
+
+## Quickstart
+
+Run the chatbot in 5 simple steps:
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git
+cd langgraph-llama-cpp-starter
+```
+
+2. **Set up a virtual environment**
+
+```bash
+python -m venv venv
+# Windows
+.\venv\Scripts\activate
+# macOS/Linux
+source venv/bin/activate
+```
+
+3. **Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+4. **Download a model**
+   Place a GGUF LLaMA model (e.g., `Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`) in the `models` folder.
+
+5. **Start the chatbot**
+
+```bash
+python main.py
+```
+
+Then type your messages and the agent will respond, using tools automatically if needed.
+For full setup, customization, and troubleshooting, see the sections below.
+
 
 ## Key Features
 
-* **Local & Private**: Run a powerful AI agent completely offline. Your data never leaves your machine.
-* **Tool-Calling Ready**: Built from the ground up to support JSON-based tool calling with local models.
-* **Efficient Inference**: Uses `llama-cpp-python` for fast and efficient CPU/GPU inference with GGUF models.
-* **Stateful Agents with LangGraph**: Implements a robust, stateful agent graph that can intelligently decide when to call tools and when to respond to the user.
-* **Easy to Customize**: Add your own custom tools by following the simple template in `tools_definition.py`.
+* **Local & Private**: Run AI agents entirely on your machine. No data is sent to external servers.
+* **Tool-Calling Ready**: Supports JSON-based tool calling, allowing agents to interact with calculators, APIs, or custom functions.
+* **Efficient Inference**: Uses `llama-cpp-python` for fast CPU/GPU inference with GGUF models, including 4-bit/8-bit quantized models.
+* **Stateful Agents**: Implements a LangGraph state machine to manage multi-step reasoning, deciding when to call tools and when to respond directly.
+* **Easy Customization**: Add new tools and modify agent behavior by editing simple Python files.
+
+## Why LangGraph + LLaMA-Cpp?
+
+Combining LangGraph with `llama-cpp-python` allows you to create agents that:
+
+* Maintain conversation state across multiple turns.
+* Perform structured reasoning with conditional tool calls.
+* Run completely offline, unlike cloud solutions like Ollama.
+
+---
 
 ## Getting Started
-
-Follow these steps to get the agent up and running.
 
 ### Prerequisites
 
 * Python 3.10 or higher
 * Git
-* C++ build tools (required for `llama-cpp-python`). Refer to the [official installation guide](https://github.com/abetlen/llama-cpp-python#installation) for your specific OS.
+* C++ build tools (required for `llama-cpp-python`)
+  See the [official installation guide](https://github.com/abetlen/llama-cpp-python#installation) for your OS.
 
 ### 1. Clone the Repository
 
 ```bash
-git clone [https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git]
-cd langgraph-llama-cpp-starter.git
+git clone https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git
+cd langgraph-llama-cpp-starter
 ```
 
 ### 2. Set Up a Virtual Environment
 
-It's highly recommended to use a virtual environment.
-
 ```bash
-# For Windows
+# Windows
 python -m venv venv
 .\venv\Scripts\activate
 
-# For macOS/Linux
+# macOS/Linux
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
-
-Install all the required Python packages. *Note: The `llama-cpp-python` installation may take a few minutes as it needs to be compiled.*
 
 ```bash
 pip install -r requirements.txt
@@ -57,77 +106,70 @@ pip install -r requirements.txt
 
 ### 4. Download an LLM Model
 
-This project is optimized for instruction-tuned GGUF models. We recommend a Llama 3.1 model.
+This project is optimized for instruction-tuned GGUF models (e.g., LLaMA 3.1).
 
-1.  Download a model like the **[Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct-GGUF/blob/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf)**.
-2.  Create a `models` folder in the root of this project.
-3.  Place the downloaded `.gguf` file inside the `models` folder.
+1. Download a model like [Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct-GGUF/blob/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf).
+2. Create a `models` folder in the project root.
+3. Place the `.gguf` file inside `models`.
+4. Update the model path in `main.py` if using a different filename.
 
-The code expects the model to be at `models/llama-3.1-8b-instruct-q4_k_m.gguf`. If you use a different model, remember to update the path in `main.py`.
+---
 
 ## Usage
 
-Once the setup is complete, you can start the chatbot.
+Start the chatbot:
 
 ```bash
 python main.py
 ```
 
-The script will load the model and you'll be prompted to enter a message.
+Example interaction:
 
-**Example Interaction:**
 ```
-JSON Tool-Calling Chatbot initialized. Type 'quit' to exit
-
 Enter a message: What is 4 multiplied by 18?
-Processing: What is 4 multiplied by 18?
-Chatbot processing: 1 messages
-LLM response: ```json
-{
-"tool_calls": [
-{
-"name": "multiply_numbers",
-"arguments": {"a": 4, "...
-Checking for tool calls in: ```json
-{
-"tool_calls": [
-{
-"name": "multiply_numbers",
-"arguments": {"a": 4, ...
-Found 1 tool calls, routing to: tools
-Processing content for JSON tool calls: ```json ...
-Parsed tool calls: [{'name': 'multiply_numbers', 'arguments': {'a': 4, 'b': 18}}]
-Tool results: [ToolMessage(content='72.0', tool_call_id='multiply_numbers_0')]
-Chatbot processing: 3 messages
-LLM response: 4 multiplied by 18 is 72.
-...
-
 Assistant: 4 multiplied by 18 is 72.
 ```
 
-## How to Customize
+The agent can detect and execute tool calls automatically, then provide a final natural language response.
+
+---
+
+## Customization
 
 ### Adding New Tools
 
-Adding your own custom tools is easy:
-
-1.  Open the `tools_definition.py` file.
-2.  Follow the commented-out **template** at the top of the file to define your tool's arguments (using Pydantic) and the tool's function.
-3.  Add your new tool function to the `tools` list at the bottom of the file.
+1. Open `tools_definition.py`.
+2. Follow the template to define tool arguments and functions.
+3. Add your new tool to the `tools` list.
 
 ### Changing the Model
 
-To use a different model, simply update the model path string in `main.py`:
+Update the model path in `main.py`:
+
 ```python
-# In main.py
-llm = MyLlamaCppWithTools("models/YOUR-NEW-MODEL-NAME.gguf")
+llm = MyLlamaCppWithTools("models/YOUR-MODEL-NAME.gguf")
 ```
+
+---
 
 ## How It Works
 
-This project uses a few key components to function:
+* **`main.py`**: Initializes the model, defines the LangGraph state, and runs the CLI.
+* **`llama_tool_wrapper.py`**: Wraps the LLaMA model to handle tool calls and parse JSON responses.
+* **`tools_definition.py`**: Library of all available tools. Add custom functions here.
+* **`llm_wrapper.py`**: Base wrapper for `llama-cpp-python` model invocation.
 
-* **`main.py`**: The main entry point. It initializes the model, defines the LangGraph state and nodes, and runs the command-line interface.
-* **`llama_tool_wrapper.py`**: The core logic. This custom wrapper class formats the system prompt with tool definitions and parses the model's JSON output to detect tool calls.
-* **`tools_definition.py`**: A library of all available tools that the agent can use. This is where you'll add your own custom functions.
-* **`llm_wrapper.py`**: A base wrapper for the `llama-cpp-python` library, handling the low-level model invocation.
+---
+
+## Troubleshooting
+
+* **Memory Issues**: Adjust `n_blocks` in `main.py` according to your GPU’s dedicated memory.
+* **Attribute Errors**: Ensure your `llama_tool_wrapper.py` version matches the LLaMA wrapper you are using.
+* **Tool Misbehavior**: Check your JSON tool format follows the required schema.
+
+---
+
+## Contributing
+
+PRs and suggestions are welcome!
+--
