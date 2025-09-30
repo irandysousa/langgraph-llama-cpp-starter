@@ -1,5 +1,3 @@
-Perfect! Here’s a polished, professional version of your README without emojis:
-
 ---
 
 # LangGraph Llama.cpp Starter
